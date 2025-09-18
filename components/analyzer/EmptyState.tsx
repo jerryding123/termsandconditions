@@ -10,7 +10,7 @@ export const EmptyState: React.FC = () => {
 
   return (
     <Box
-      minH="400px"
+      minH="500px"
       display="flex"
       alignItems="center"
       justifyContent="center"

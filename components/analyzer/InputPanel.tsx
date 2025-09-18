@@ -6,6 +6,7 @@ import {
   Button,
   Badge,
   Box,
+  Text,
 } from '@chakra-ui/react'
 import { useNeumorphicTheme } from 'theme/components/neumorphic' // Adjust path as needed
 
@@ -30,25 +31,28 @@ export const InputPanel: React.FC<InputPanelProps> = ({
   return (
     <Box
       bg={theme.backgroundColor}
-      borderRadius="16px"
+      borderRadius="8px"
       ml="30px"
-      p="8"
+      pl="8"
+      pr="8"
+      pt="6"
+      pb="8"
       boxShadow={theme.getRaisedShadow('sm')}
       transition="all 0.3s ease"
       position="relative"
     >
-      <VStack spacing="6" align="stretch">
+      <VStack spacing="4" align="stretch">
         <HStack justify="space-between" align="center">
-          <Heading size="md" color={theme.textColor} fontWeight="600">
+          <Heading size="md" color={theme.textColor} fontWeight="700">
             Input Terms & Conditions
           </Heading>
           <Badge
             bg={theme.backgroundColor}
             color={theme.textColor}
             variant="solid"
-            borderRadius="12px"
-            px="4"
-            py="2"
+            borderRadius="8px"
+            px="2.5"
+            py="1.5"
             boxShadow={`inset 0.5px 0.5px 1px ${theme.darkShadowColor}, inset -0.5px -0.5px 1px ${theme.lightShadowColor}`}
             fontWeight="600"
           >
@@ -56,22 +60,36 @@ export const InputPanel: React.FC<InputPanelProps> = ({
           </Badge>
         </HStack>
 
+        {/* Descriptive text section */}
+        <Box>
+          <Text 
+            color={theme.textColor} 
+            fontSize="sm" 
+            lineHeight="1.6"
+            opacity="0.6"
+            mb="2"
+          >
+            Paste any terms and conditions document below to get a clear, easy-to-understand analysis. 
+            Our AI will identify key points, potential concerns, and important clauses you should know about.
+          </Text>
+        </Box>
+
         {/* Neumorphic Textarea Container - more subtle */}
         <Box
-          borderRadius="12px"
+          borderRadius="4px"
           p="1"
           boxShadow={theme.getInsetShadow('sm')}
         >
           <Textarea
-            placeholder="Paste your terms and conditions here...&#10;For example, you can copy from any website's T&C page, app privacy policy, or service agreement."
+            // placeholder="Paste your terms and conditions here...&#10;For example, you can copy from any website's T&C page, app privacy policy, or service agreement."
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
             size="md"
-            minH="480px"
+            minH="600px"
             resize="vertical"
             border="none"
             borderRadius="10px"
-            p="6"
+            p="2"
             fontSize="md"
             lineHeight="1.6"
             bg="transparent"
@@ -96,7 +114,7 @@ export const InputPanel: React.FC<InputPanelProps> = ({
             loadingText="Analyzing..."
             isDisabled={!inputText.trim()}
             flex="1"
-            borderRadius="12px"
+            borderRadius="8px"
             h="14"
             fontWeight="600"
             border="none"
@@ -126,7 +144,7 @@ export const InputPanel: React.FC<InputPanelProps> = ({
             size="lg"
             onClick={onClear}
             isDisabled={isAnalyzing}
-            borderRadius="12px"
+            borderRadius="8px"
             h="14"
             fontWeight="600"
             border="none"

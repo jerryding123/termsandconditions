@@ -15,24 +15,8 @@ const Home: NextPage = () => {
   
   return (
     <Box minH="100vh" bg={bgColor}>
-      <Container maxW="container.2xl" pt="24" pb="12" pl="24">
-        <VStack spacing="8">
-          {/* Header */}
-          <VStack spacing="4" textAlign="center" maxW="4xl">
-            <Heading
-              fontSize={{ base: "4xl", md: "4xl", lg: "4xl" }}
-              fontWeight="bold"
-              bgGradient="linear(to-r, blue.400, purple.500)"
-              bgClip="text"
-            >
-              Terms & Conditions Analyzer
-            </Heading>
-            <Text fontSize={{ base: "lg", md: "xl" }} color="gray.600" maxW="2xl">
-              Paste your terms and conditions below to get a simplified explanation
-              and identify potential red flags that you should be aware of.
-            </Text>
-          </VStack>
-          
+      <Container maxW="container.2xl" pt="28" pb="12" pl="24">
+        <VStack spacing="8">         
           {/* Main Analyzer Component */}
           <TermsAnalyzer />
           

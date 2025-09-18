@@ -40,25 +40,29 @@ export const OutputPanel: React.FC<OutputPanelProps> = ({
   return (
     <Box
       bg={theme.backgroundColor}
-      borderRadius="16px"
+      borderRadius="8px"
       mr="120px"
-      p="6"
-      boxShadow={theme.getInsetShadow('md')}
+      ml="30px"
+      pl="8"
+      pr="8"
+      pt="6"
+      pb="8"
+      boxShadow={theme.getInsetShadow('sm')}
       transition="all 0.3s ease"
       position="relative"
     >
-      <VStack spacing="6" align="stretch">
+      <VStack spacing="4" align="stretch">
         <HStack justify="space-between" align="center">
-          <Heading size="md" color={theme.textColor} fontWeight="600">
+          <Heading size="md" color={theme.textColor} fontWeight="700">
             Analysis Results
           </Heading>
           <Badge
             bg={theme.backgroundColor}
             color={theme.textColor}
             variant="solid"
-            borderRadius="12px"
-            px="4"
-            py="2"
+            borderRadius="8px"
+            px="2.5"
+            py="1.5"
             boxShadow={`inset 0.5px 0.5px 1px ${theme.darkShadowColor}, inset -0.5px -0.5px 1px ${theme.lightShadowColor}`}
             fontWeight="600"
           >
@@ -68,9 +72,9 @@ export const OutputPanel: React.FC<OutputPanelProps> = ({
 
         {/* Simple Content Container */}
         <Box
-          borderRadius="12px"
+          borderRadius="8px"
           p="4"
-          minH="500px"
+          minH="600px"
           bg="transparent"
           transition="all 0.2s ease"
         >
