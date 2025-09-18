@@ -4,11 +4,10 @@ import {
   Heading,
   Textarea,
   Button,
-  Card,
-  CardBody,
   Badge,
-  useColorModeValue,
+  Box,
 } from '@chakra-ui/react'
+import { useNeumorphicTheme } from 'theme/components/neumorphic' // Adjust path as needed
 
 interface InputPanelProps {
   inputText: string
@@ -25,107 +24,133 @@ export const InputPanel: React.FC<InputPanelProps> = ({
   onClear,
   isAnalyzing,
 }) => {
-  const cardBg = useColorModeValue('white', 'gray.800')
-  const borderColor = useColorModeValue('gray.200', 'gray.700')
-  const shadowColor = useColorModeValue('rgba(0, 0, 0, 0.08)', 'rgba(0, 0, 0, 0.3)')
+  // Use the reusable neumorphic theme hook
+  const theme = useNeumorphicTheme()
 
   return (
-    <Card 
-      bg={cardBg} 
-      borderRadius="20px"
-      border="none"
-      boxShadow={useColorModeValue(
-        '0 10px 40px -10px rgba(0, 0, 0, 0.12)', 
-        '0 10px 40px -10px rgba(0, 0, 0, 0.4)'
-      )}
-      overflow="hidden"
+    <Box
+      bg={theme.backgroundColor}
+      borderRadius="16px"
+      ml="30px"
+      p="8"
+      boxShadow={theme.getRaisedShadow('sm')}
+      transition="all 0.3s ease"
+      position="relative"
     >
-      <CardBody p="5">
-        <VStack spacing="6" align="stretch">
-          <HStack justify="space-between" align="center">
-            <Heading size="md" color={useColorModeValue('black', 'white')}>
-              Input Terms & Conditions
-            </Heading>
-            <Badge 
-              colorScheme="gray" 
-              variant="subtle"
-              borderRadius="12px"
-              px="3"
-              py="1"
-            >
-              Step 1
-            </Badge>
-          </HStack>
-          
+      <VStack spacing="6" align="stretch">
+        <HStack justify="space-between" align="center">
+          <Heading size="md" color={theme.textColor} fontWeight="600">
+            Input Terms & Conditions
+          </Heading>
+          <Badge
+            bg={theme.backgroundColor}
+            color={theme.textColor}
+            variant="solid"
+            borderRadius="12px"
+            px="4"
+            py="2"
+            boxShadow={`inset 0.5px 0.5px 1px ${theme.darkShadowColor}, inset -0.5px -0.5px 1px ${theme.lightShadowColor}`}
+            fontWeight="600"
+          >
+            Step 1
+          </Badge>
+        </HStack>
+
+        {/* Neumorphic Textarea Container - more subtle */}
+        <Box
+          borderRadius="12px"
+          p="1"
+          boxShadow={theme.getInsetShadow('sm')}
+        >
           <Textarea
             placeholder="Paste your terms and conditions here...&#10;For example, you can copy from any website's T&C page, app privacy policy, or service agreement."
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
             size="md"
-            minH="400px"
+            minH="480px"
             resize="vertical"
-            borderColor={borderColor}
-            borderRadius="16px"
-            p="4"
+            border="none"
+            borderRadius="10px"
+            p="6"
             fontSize="md"
             lineHeight="1.6"
+            bg="transparent"
+            color={theme.textColor}
+            _placeholder={{ color: theme.placeholderColor }}
             _focus={{
-              borderColor: useColorModeValue('black', 'white'),
-              boxShadow: `0 0 0 3px ${useColorModeValue('rgba(0, 0, 0, 0.1)', 'rgba(255, 255, 255, 0.1)')}`,
-              outline: "none"
+              outline: "none",
+              boxShadow: "none"
             }}
-            _hover={{
-              borderColor: useColorModeValue('gray.400', 'gray.500')
-            }}
+            _hover={{}}
             transition="all 0.2s ease"
           />
-          
-          <HStack spacing="4">
-            <Button
-              bg={useColorModeValue('black', 'white')}
-              color={useColorModeValue('white', 'black')}
-              size="lg"
-              onClick={onAnalyze}
-              isLoading={isAnalyzing}
-              loadingText="Analyzing..."
-              isDisabled={!inputText.trim()}
-              flex="1"
-              borderRadius="8px"
-              h="12"
-              fontWeight="600"
-              _hover={{
-                transform: "translateY(-1px)",
-                shadow: "lg",
-                bg: useColorModeValue('gray.800', 'gray.200')
-              }}
-              transition="all 0.2s ease"
-            >
-              Analyze Terms
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={onClear}
-              isDisabled={isAnalyzing}
-              borderRadius="8px"
-              h="12"
-              borderWidth="2px"
-              borderColor={useColorModeValue('black', 'white')}
-              color={useColorModeValue('black', 'white')}
-              fontWeight="600"
-              _hover={{
-                transform: "translateY(-1px)",
-                shadow: "md",
-                bg: useColorModeValue('gray.50', 'gray.700')
-              }}
-              transition="all 0.2s ease"
-            >
-              Clear
-            </Button>
-          </HStack>
-        </VStack>
-      </CardBody>
-    </Card>
+        </Box>
+
+        <HStack spacing="4">
+          <Button
+            bg={theme.backgroundColor}
+            color={theme.textColor}
+            size="lg"
+            onClick={onAnalyze}
+            isLoading={isAnalyzing}
+            loadingText="Analyzing..."
+            isDisabled={!inputText.trim()}
+            flex="1"
+            borderRadius="12px"
+            h="14"
+            fontWeight="600"
+            border="none"
+            boxShadow={theme.getButtonHoverShadow()}
+            _hover={{
+              transform: "translateY(-1px)",
+              boxShadow: theme.getButtonHoverShadow(),
+              bg: theme.backgroundColor,
+            }}
+            _active={{
+              transform: "translateY(1px)",
+              boxShadow: theme.getButtonActiveShadow(),
+            }}
+            _disabled={{
+              opacity: 0.6,
+              transform: "none",
+              boxShadow: `inset 0.5px 0.5px 1px ${theme.darkShadowColor}, inset -0.5px -0.5px 1px ${theme.lightShadowColor}`,
+            }}
+            transition="all 0.2s ease"
+          >
+            Analyze Terms
+          </Button>
+
+          <Button
+            bg={theme.backgroundColor}
+            color={theme.textColor}
+            size="lg"
+            onClick={onClear}
+            isDisabled={isAnalyzing}
+            borderRadius="12px"
+            h="14"
+            fontWeight="600"
+            border="none"
+            boxShadow={theme.getButtonHoverShadow()}
+            _hover={{
+              transform: "translateY(-1px)",
+              boxShadow: theme.getButtonHoverShadow(),
+              bg: theme.backgroundColor,
+            }}
+            _active={{
+              transform: "translateY(1px)",
+              boxShadow: theme.getButtonActiveShadow(),
+            }}
+            _disabled={{
+              opacity: 0.6,
+              transform: "none",
+              boxShadow: `inset 0.5px 0.5px 1px ${theme.darkShadowColor}, inset -0.5px -0.5px 1px ${theme.lightShadowColor}`,
+            }}
+            transition="all 0.2s ease"
+          >
+            Clear
+          </Button>
+        </HStack>
+      </VStack>
+    </Box>
   )
 }
